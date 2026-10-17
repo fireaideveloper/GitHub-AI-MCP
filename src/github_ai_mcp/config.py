@@ -1,4 +1,3 @@
-"""Trusted local JSON configuration. MCP never exposes configuration mutations."""
 import json
 import os
 from pathlib import Path
@@ -98,7 +97,6 @@ def save_config(path: Path, config: Config) -> None:
 
 
 def resolve_config(path: Path | None = None) -> Path:
-    """Explicit paths, environment, then per-user state; never write beside the EXE."""
     if path is not None:
         return path.expanduser().resolve()
     if os.environ.get("GITHUB_AI_CONFIG"):
