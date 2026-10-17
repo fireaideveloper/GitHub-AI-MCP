@@ -1,4 +1,3 @@
-"""Kernel-owned interprocess locks: automatic release after crash, no stale PID trust."""
 import hashlib
 import importlib
 import os
