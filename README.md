@@ -35,3 +35,7 @@ Next publish job persistence and orchestration, Git operations and GitHub API su
 ## Security and development status
 
 Python 3.12+ is required. Do not commit real tokens, private configuration, databases, vendor binaries, or build outputs. The published source subset cannot run a complete CLI, MCP server, or desktop application; some newly published modules depend on components not yet available in this repository. Native Windows compilation and end-to-end validation remain outstanding.
+
+## Source code style
+
+All Python source code in this repository must remain free of inline comments, standalone comments, and documentation-only docstrings. Future changes should follow the same convention. Keep project explanations in the README or other documentation files, not in source code comments.
