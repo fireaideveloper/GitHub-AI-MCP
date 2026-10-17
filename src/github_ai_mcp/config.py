@@ -19,12 +19,9 @@ class Repository(StrictModel):
     identity_authorized: bool = False
     allow_binary: bool = False
     required_checks: list[str] = Field(default_factory=list)
-    # Commands are trusted local administration, never MCP inputs.
     @field_validator("author_name", "author_email")
     @classmethod
     def real_identity_text(cls, value: str, info):
-        # Legacy configurations may omit email. Preserve read-only access, but
-        # require an explicit identity before any commit/publication.
         if info.field_name == "author_email" and value == "":
             return value
         if not value or len(value) > 200 or any(ord(c) < 32 for c in value) or "<" in value or ">" in value:
@@ -37,8 +34,6 @@ class Repository(StrictModel):
 
 class Grant(StrictModel):
     repository: str
-    # Empty string explicitly opts into all safe non-default task branches.
-    # Existing ai/* grants are never widened automatically.
     branch_prefix: str = "ai/"
     actions: list[Literal["commit", "push", "pr"]]
     expires_at: float
@@ -61,7 +56,6 @@ class Config(StrictModel):
     restart_services: bool = True
     critical_notifications: bool = True
     tunnel_profile_file: str = ""
-    # Explicit local administrator override; empty follows the current executable.
     tunnel_stdio_command: str = ""
     background_on_close: bool = True
     setup_complete: bool = False
