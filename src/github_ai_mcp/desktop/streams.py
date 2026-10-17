@@ -1,7 +1,3 @@
-"""Recover inherited Windows pipes in PyInstaller's windowed executable.
-
-Never allocate a console. Stdout is reserved for JSON-RPC in stdio mode.
-"""
 import ctypes
 import io
 import os
