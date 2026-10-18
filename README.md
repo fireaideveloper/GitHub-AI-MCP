@@ -2,7 +2,7 @@
 
 Desktop-oriented GitHub MCP project for controlled repository changes, task-based branches, local review, and pull requests.
 
-> **Work in progress — staged publication.** This repository currently contains the initial project metadata and foundational and security source modules. The application is **not yet runnable** from this repository; remaining source, tests, and build scripts will follow in reviewed changes.
+> **Work in progress — staged publication.** This repository currently contains the project metadata, security modules, Git and GitHub clients, persistent job storage, and basic desktop service utilities. The application is **not yet runnable** from this repository; remaining source, tests, and build scripts will follow in reviewed changes.
 
 ## Planned capabilities
 
@@ -28,9 +28,17 @@ Desktop-oriented GitHub MCP project for controlled repository changes, task-base
 - `src/github_ai_mcp/security/auth_mcp.py` — localhost MCP authorization and rate limiting.
 - `src/github_ai_mcp/security/policy.py` — repository authorization and publishing policy.
 
+- `src/github_ai_mcp/core/git_engine.py` — hardened Git execution and repository inspection.
+- `src/github_ai_mcp/core/github_api.py` — authenticated GitHub REST client.
+- `src/github_ai_mcp/storage/database.py` — SQLite job persistence, approvals, and audit history.
+- `src/github_ai_mcp/desktop/control.py` — protected local health and shutdown routes.
+- `src/github_ai_mcp/desktop/runtime.py` — executable resource and service command handling.
+- `src/github_ai_mcp/desktop/prerequisites.py` — dependency and credential-vault diagnostics.
+- `src/github_ai_mcp/desktop/processes.py` — isolated subprocesses and Windows process-tree handling.
+
 ## Next stages
 
-Next publish job persistence and orchestration, Git operations and GitHub API support, the MCP server and CLI, desktop GUI and tunnel supervision, tests, and packaging tools.
+Next publish job orchestration, the MCP server and CLI, desktop GUI and tunnel supervision, tests, and packaging tools.
 
 ## Security and development status
 
