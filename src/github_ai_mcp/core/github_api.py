@@ -1,3 +1,4 @@
+"""Canonical GitHub REST endpoint, bounded requests, safe public failures."""
 import time
 from urllib.parse import quote
 
@@ -39,7 +40,9 @@ class GitHub:
                     continue
                 if r.status_code == 401:
                     raise AppError("AUTH_REQUIRED", "GitHub credential expired or invalid")
-
+                # GitHub Free does not expose branch rulesets on private repositories.
+                # Distinguish ONLY GitHub's exact plan-upgrade denial, so other 403/404
+                # responses remain fail-closed and cannot be silently ignored.
                 if (r.status_code == 403 and method == "GET"
                         and path.startswith("/repos/") and "/rules/branches/" in path):
                     try:
