@@ -1,8 +1,10 @@
+"""Argument-array Git operations; isolated indexes and hardened configuration."""
 import os
 import subprocess
-from pathlib import Path
 
 from github_ai_mcp.desktop.processes import run_background
+from pathlib import Path
+
 from github_ai_mcp.exceptions import AppError
 from github_ai_mcp.security.auth_github import get_token
 
@@ -15,7 +17,8 @@ class Git:
         env = {k: v for k, v in os.environ.items() if not k.startswith(("GIT_", "GH_", "GITHUB_"))}
         env.update(GIT_CONFIG_NOSYSTEM="1", GIT_CONFIG_GLOBAL=os.devnull,
                    GIT_TERMINAL_PROMPT="0", GIT_LITERAL_PATHSPECS="1")
-
+        # GitHub CLI reads a transient token from the OS vault for network commands.
+        # Nothing is written to gh's configuration, command line, or Git remotes.
         if args and args[0] in {"clone", "fetch", "ls-remote", "push"}:
             github_source = any(a.startswith("https://github.com/") for a in args)
             if not github_source and (cwd / ".git").exists():
@@ -26,8 +29,8 @@ class Git:
                 try:
                     env["GH_TOKEN"] = get_token()
                 except AppError:
-                    pass
-
+                    pass  # Public cloning may succeed without authentication.
+        # Fresh clones have no inherited hooks/filters. Disable template hooks explicitly.
         command = ["git", "-c", "core.hooksPath=" + os.devnull, "-c", "credential.helper=",
                    "-c", "credential.https://github.com.helper=!gh auth git-credential",
                    "-c", "core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol",
@@ -39,6 +42,7 @@ class Git:
         except (OSError, subprocess.TimeoutExpired):
             raise AppError("GIT_UNAVAILABLE", "Git unavailable or command timed out") from None
         if p.returncode:
+            # Git stderr can contain credentials or private code: never forward it.
             raise AppError("GIT_ERROR", f"Git operation failed ({args[0]}, exit {p.returncode})")
         return p.stdout
 
