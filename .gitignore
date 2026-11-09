@@ -13,3 +13,9 @@ config/config.json
 !.env.example
 *.sqlite3*
 vendor/
+
+# Local test coverage reports
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
