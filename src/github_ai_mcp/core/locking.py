@@ -1,3 +1,4 @@
+"""Kernel-owned interprocess locks: automatic release after crash, no stale PID trust."""
 import hashlib
 import importlib
 import os
@@ -21,8 +22,9 @@ def lock(root: Path, key: str):
         try:
             if os.name == "nt":
                 import msvcrt
-                msvcrt.locking(f.fileno(), msvcrt.LK_NBLCK, 1)
+                msvcrt.locking(f.fileno(), msvcrt.LK_NBLCK, 1)  # type: ignore[attr-defined]
             else:
+                # Load the POSIX-only module dynamically for Windows mypy compatibility.
                 fcntl = cast(Any, importlib.import_module("fcntl"))
                 fcntl.flock(f.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
         except OSError:
@@ -33,7 +35,7 @@ def lock(root: Path, key: str):
             if os.name == "nt":
                 import msvcrt
                 f.seek(0)
-                msvcrt.locking(f.fileno(), msvcrt.LK_UNLCK, 1)
+                msvcrt.locking(f.fileno(), msvcrt.LK_UNLCK, 1)  # type: ignore[attr-defined]
             else:
                 fcntl = cast(Any, importlib.import_module("fcntl"))
                 fcntl.flock(f.fileno(), fcntl.LOCK_UN)
