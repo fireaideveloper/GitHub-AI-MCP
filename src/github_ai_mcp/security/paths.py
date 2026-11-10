@@ -1,3 +1,4 @@
+"""Portable, fail-closed repository path validation."""
 import re
 from pathlib import Path, PurePosixPath
 
