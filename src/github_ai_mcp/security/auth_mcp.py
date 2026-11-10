@@ -1,3 +1,4 @@
+"""Loopback HTTP bearer authentication; stdio relies on trusted process ownership."""
 import hmac
 import time
 from collections import deque
