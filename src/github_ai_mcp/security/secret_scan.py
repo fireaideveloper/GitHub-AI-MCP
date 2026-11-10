@@ -1,3 +1,4 @@
+"""Conservative credential indicators; never return matched values."""
 import re
 
 from github_ai_mcp.exceptions import AppError
