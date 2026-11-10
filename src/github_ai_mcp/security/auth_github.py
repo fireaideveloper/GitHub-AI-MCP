@@ -1,3 +1,4 @@
+"""OS vault only. No token argument, config field, or database persistence."""
 import keyring
 
 from github_ai_mcp.exceptions import AppError
