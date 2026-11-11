@@ -1,3 +1,4 @@
+"""Transactional job records and immutable audit metadata, schema version 1."""
 import json
 import sqlite3
 import time
