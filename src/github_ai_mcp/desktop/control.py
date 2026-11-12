@@ -1,3 +1,4 @@
+"""Local lifecycle routes protected by bearer auth and a private per-instance nonce."""
 import hmac
 import hashlib
 import os
