@@ -1,3 +1,4 @@
+"""Frozen windowed entrypoint: GUI only; pipe-capable server has its own entrypoint."""
 import sys
 from pathlib import Path
 
@@ -10,7 +11,7 @@ def main():
     from github_ai_mcp.desktop.streams import prepare_streams
     internal = "--internal-server" in sys.argv[1:]
     cli = "--cli" in sys.argv[1:]
-
+    # Dispatch before Qt import; HTTP and stdio workers never create a GUI.
     service = internal or "serve" in sys.argv[1:]
     prepare_streams(require_input=service and "streamable-http" not in sys.argv)
     if service or cli:
