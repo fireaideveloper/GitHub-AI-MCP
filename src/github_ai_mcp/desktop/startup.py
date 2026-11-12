@@ -1,3 +1,4 @@
+"""One opt-in HKCU Run value; no elevation, credentials, or shell commands."""
 import os
 import subprocess
 import sys
@@ -44,7 +45,7 @@ def status(config_path):
 
 def enable(config_path):
     reg = registry()
-
+    # Legacy installer shortcuts must be disabled first to avoid competing launches.
     legacy = Path(os.environ.get("APPDATA", "")) / "Microsoft/Windows/Start Menu/Programs/Startup/GitHub-AI-MCP.lnk"
     if legacy.is_file():
         raise AppError("STARTUP_CONFLICT", "Remove the old GitHub-AI-MCP startup shortcut first / Удалите старый ярлык GitHub-AI-MCP из автозагрузки")
