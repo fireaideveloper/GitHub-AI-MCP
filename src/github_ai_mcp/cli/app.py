@@ -1,3 +1,4 @@
+"""Trusted local CLI. Never run local approval commands on behalf of an AI tool."""
 import argparse
 import getpass
 import json
@@ -58,8 +59,8 @@ def main():
                 from github_ai_mcp.security.auth_github import store_secret
                 token = secrets.token_urlsafe(32)
                 store_secret("mcp-http", token)
-
-                print("MCP HTTP authentication token; save in your client's secure credentials (never Git):")
+                # Explicit local administrator command is the only place this secret is printed.
+                print("MCP HTTP bearer token; save in your client's secure credentials (never Git):")
                 print(token)
                 return
         else:
