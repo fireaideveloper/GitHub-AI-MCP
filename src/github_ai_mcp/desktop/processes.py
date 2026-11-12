@@ -1,3 +1,4 @@
+"""No-console subprocesses and Windows kernel-owned process trees."""
 import ctypes
 import os
 import subprocess
@@ -10,6 +11,7 @@ def background_options(suspended=False) -> dict:
 
 
 class ProcessTree:
+    """KILL_ON_JOB_CLOSE prevents orphaned descendants when the controller crashes."""
     def __init__(self, process, suspended=False):
         self.process = process
         self.handle = None
@@ -21,23 +23,19 @@ class ProcessTree:
         kernel.SetInformationJobObject.argtypes = [wintypes.HANDLE, ctypes.c_int, ctypes.c_void_p, wintypes.DWORD]
         kernel.AssignProcessToJobObject.argtypes = [wintypes.HANDLE, wintypes.HANDLE]
         kernel.CloseHandle.argtypes = [wintypes.HANDLE]
-
         class Basic(ctypes.Structure):
             _fields_ = [("process_time", ctypes.c_int64), ("job_time", ctypes.c_int64),
                         ("flags", wintypes.DWORD), ("min_ws", ctypes.c_size_t),
                         ("max_ws", ctypes.c_size_t), ("active", wintypes.DWORD),
                         ("affinity", ctypes.c_size_t), ("priority", wintypes.DWORD),
                         ("scheduling", wintypes.DWORD)]
-
         class IO(ctypes.Structure):
             _fields_ = [(name, ctypes.c_uint64) for name in
                         ["read_ops", "write_ops", "other_ops", "read_bytes", "write_bytes", "other_bytes"]]
-
         class Extended(ctypes.Structure):
             _fields_ = [("basic", Basic), ("io", IO), ("process_memory", ctypes.c_size_t),
                         ("job_memory", ctypes.c_size_t), ("peak_process", ctypes.c_size_t),
                         ("peak_job", ctypes.c_size_t)]
-
         info = Extended()
         info.basic.flags = 0x2000
         handle = kernel.CreateJobObjectW(None, None)
@@ -58,6 +56,8 @@ class ProcessTree:
                 raise
 
     def _resume(self):
+        # Popen closes the primary-thread handle. Enumerate only this suspended
+        # process's thread, after it is contained, and resume it via official APIs.
         class ThreadEntry(ctypes.Structure):
             _fields_ = [("size", wintypes.DWORD), ("usage", wintypes.DWORD),
                         ("id", wintypes.DWORD), ("owner", wintypes.DWORD),
