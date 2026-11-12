@@ -1,3 +1,4 @@
+"""Read-only dependency diagnostics; no installs, network access or vendor commands."""
 import shutil
 import subprocess
 
