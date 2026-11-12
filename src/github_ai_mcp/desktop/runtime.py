@@ -1,6 +1,8 @@
+"""Read-only bundle resources and same-executable worker commands."""
 import os
 import sys
 from pathlib import Path
+
 
 
 def program_root() -> Path:
@@ -26,6 +28,7 @@ def bundled_tool(name: str) -> str | None:
 
 
 def initialize_runtime():
+    """Make bundled Git and its credential helper available to existing tool calls."""
     if getattr(sys, "frozen", False):
         directories = [str(program_root() / "vendor/git/cmd"), str(program_root() / "vendor")]
         os.environ["PATH"] = os.pathsep.join([*directories, os.environ.get("PATH", "")])
