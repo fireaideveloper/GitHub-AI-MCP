@@ -1,3 +1,4 @@
+"""Official SDK v2 MCP registration. Local administration is excluded by construction."""
 import functools
 import inspect
 import json
@@ -76,7 +77,7 @@ def serve(service: Service, transport: str):
             raise AppError("AUTH_REQUIRED", "Create an MCP HTTP token locally: github-ai-mcp auth-mcp")
         app = server.streamable_http_app(json_response=True, stateless_http=True,
                                          max_request_body_size=2_000_000, host="127.0.0.1")
-
+        # Only the local controller can stop its instance; not an MCP tool.
         import os
         from github_ai_mcp.desktop.control import ControlRoutes
         config = uvicorn.Config(app, host="127.0.0.1", port=service.config.port,
