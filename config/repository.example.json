@@ -1,0 +1,13 @@
+{
+  "example-owner/example-repo": {
+    "source": "https://github.com/example-owner/example-repo.git",
+    "default_branch": "main",
+    "author_name": "Example Author",
+    "author_email": "author@example.invalid",
+    "identity_authorized": false,
+    "allow_binary": false,
+    "required_checks": [],
+    "checks": {},
+    "trusted_execution": false
+  }
+}
