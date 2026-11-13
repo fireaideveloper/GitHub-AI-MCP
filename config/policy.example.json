@@ -1,0 +1,16 @@
+{
+  "grants": [
+    {
+      "repository": "example-owner/example-repo",
+      "branch_prefix": "ai/",
+      "actions": [
+        "commit",
+        "push",
+        "pr"
+      ],
+      "expires_at": 0.0,
+      "max_files": 100,
+      "max_bytes": 10000000
+    }
+  ]
+}
