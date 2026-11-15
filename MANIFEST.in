@@ -1,0 +1,12 @@
+include README.md README_RU.md LICENSE SECURITY.md CONTRIBUTING.md CHANGELOG.md uv.lock .env.example .gitignore
+recursive-include docs *.md *.png *.json *.txt
+recursive-include launcher *.ps1 *.bat *.md *.iss *.spec *.txt *.py
+recursive-include config *.example.json
+recursive-include examples *.py *.md
+recursive-include tests *.py
+recursive-include .github *.yml
+
+
+
+recursive-include assets *.ico *.png *.svg
+recursive-include scripts *.py
