@@ -1,0 +1,15 @@
+name: Security regressions
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  boundaries:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/setup-python@e797f83bcb11b83ae66e0230d6156d7c80228e7c # v6.0.0
+        with:
+          python-version: '3.12'
+      - run: python -m pip install uv==0.12.24
+      - run: uv sync --frozen --extra dev
+      - run: uv run --frozen --extra dev pytest -q tests/test_security.py tests/test_publication.py tests/test_mcp.py
