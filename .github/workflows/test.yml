@@ -1,0 +1,23 @@
+name: Test
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  offline:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    env:
+      QT_QPA_PLATFORM: offscreen
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/setup-python@e797f83bcb11b83ae66e0230d6156d7c80228e7c # v6.0.0
+        with:
+          python-version: '3.12'
+      - run: python -m pip install uv==0.12.24
+      - run: uv sync --frozen --extra gui --extra dev
+      - run: uv run --frozen --extra gui --extra dev pytest -q
+      - run: uv run --frozen --extra gui --extra dev ruff check .
+      - run: uv run --frozen --extra gui --extra dev mypy src
+      - run: uv run --frozen --extra gui --extra dev python examples/local_demo.py
