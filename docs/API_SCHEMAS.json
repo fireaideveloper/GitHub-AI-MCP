@@ -1,0 +1,2202 @@
+[
+  {
+    "name": "github_mcp.health_check",
+    "title": null,
+    "description": "health check",
+    "inputSchema": {
+      "properties": {},
+      "title": "health_checkArguments",
+      "type": "object"
+    },
+    "execution": null,
+    "outputSchema": {
+      "properties": {
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        }
+      },
+      "required": [
+        "ok"
+      ],
+      "title": "ToolResult",
+      "type": "object"
+    },
+    "icons": null,
+    "annotations": {
+      "title": null,
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": null,
+      "openWorldHint": false
+    },
+    "_meta": null
+  },
+  {
+    "name": "github_mcp.list_repositories",
+    "title": null,
+    "description": "list repositories",
+    "inputSchema": {
+      "properties": {},
+      "title": "list_repositoriesArguments",
+      "type": "object"
+    },
+    "execution": null,
+    "outputSchema": {
+      "properties": {
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        }
+      },
+      "required": [
+        "ok"
+      ],
+      "title": "ToolResult",
+      "type": "object"
+    },
+    "icons": null,
+    "annotations": {
+      "title": null,
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": null,
+      "openWorldHint": false
+    },
+    "_meta": null
+  },
+  {
+    "name": "github_mcp.get_repository_info",
+    "title": null,
+    "description": "get repository info",
+    "inputSchema": {
+      "properties": {
+        "repository": {
+          "title": "Repository",
+          "type": "string"
+        }
+      },
+      "required": [
+        "repository"
+      ],
+      "title": "get_repository_infoArguments",
+      "type": "object"
+    },
+    "execution": null,
+    "outputSchema": {
+      "properties": {
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        }
+      },
+      "required": [
+        "ok"
+      ],
+      "title": "ToolResult",
+      "type": "object"
+    },
+    "icons": null,
+    "annotations": {
+      "title": null,
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": null,
+      "openWorldHint": false
+    },
+    "_meta": null
+  },
+  {
+    "name": "github_mcp.list_branches",
+    "title": null,
+    "description": "list branches",
+    "inputSchema": {
+      "properties": {
+        "repository": {
+          "title": "Repository",
+          "type": "string"
+        }
+      },
+      "required": [
+        "repository"
+      ],
+      "title": "list_branchesArguments",
+      "type": "object"
+    },
+    "execution": null,
+    "outputSchema": {
+      "properties": {
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        }
+      },
+      "required": [
+        "ok"
+      ],
+      "title": "ToolResult",
+      "type": "object"
+    },
+    "icons": null,
+    "annotations": {
+      "title": null,
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": null,
+      "openWorldHint": false
+    },
+    "_meta": null
+  },
+  {
+    "name": "github_mcp.list_tree",
+    "title": null,
+    "description": "list tree",
+    "inputSchema": {
+      "properties": {
+        "repository": {
+          "title": "Repository",
+          "type": "string"
+        },
+        "offset": {
+          "default": 0,
+          "title": "Offset",
+          "type": "integer"
+        },
+        "limit": {
+          "default": 100,
+          "title": "Limit",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "repository"
+      ],
+      "title": "list_treeArguments",
+      "type": "object"
+    },
+    "execution": null,
+    "outputSchema": {
+      "properties": {
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        }
+      },
+      "required": [
+        "ok"
+      ],
+      "title": "ToolResult",
+      "type": "object"
+    },
+    "icons": null,
+    "annotations": {
+      "title": null,
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": null,
+      "openWorldHint": false
+    },
+    "_meta": null
+  },
+  {
+    "name": "github_mcp.read_file",
+    "title": null,
+    "description": "read file",
+    "inputSchema": {
+      "properties": {
+        "repository": {
+          "title": "Repository",
+          "type": "string"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "job_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Job Id"
+        },
+        "binary": {
+          "default": false,
+          "title": "Binary",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "repository",
+        "path"
+      ],
+      "title": "read_fileArguments",
+      "type": "object"
+    },
+    "execution": null,
+    "outputSchema": {
+      "properties": {
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        }
+      },
+      "required": [
+        "ok"
+      ],
+      "title": "ToolResult",
+      "type": "object"
+    },
+    "icons": null,
+    "annotations": {
+      "title": null,
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": null,
+      "openWorldHint": false
+    },
+    "_meta": null
+  },
+  {
+    "name": "github_mcp.read_files_batch",
+    "title": null,
+    "description": "read files batch",
+    "inputSchema": {
+      "properties": {
+        "repository": {
+          "title": "Repository",
+          "type": "string"
+        },
+        "paths": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Paths",
+          "type": "array"
+        }
+      },
+      "required": [
+        "repository",
+        "paths"
+      ],
+      "title": "read_files_batchArguments",
+      "type": "object"
+    },
+    "execution": null,
+    "outputSchema": {
+      "properties": {
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        }
+      },
+      "required": [
+        "ok"
+      ],
+      "title": "ToolResult",
+      "type": "object"
+    },
+    "icons": null,
+    "annotations": {
+      "title": null,
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": null,
+      "openWorldHint": false
+    },
+    "_meta": null
+  },
+  {
+    "name": "github_mcp.get_diff",
+    "title": null,
+    "description": "get diff",
+    "inputSchema": {
+      "properties": {
+        "job_id": {
+          "title": "Job Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "job_id"
+      ],
+      "title": "get_diffArguments",
+      "type": "object"
+    },
+    "execution": null,
+    "outputSchema": {
+      "properties": {
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        }
+      },
+      "required": [
+        "ok"
+      ],
+      "title": "ToolResult",
+      "type": "object"
+    },
+    "icons": null,
+    "annotations": {
+      "title": null,
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": null,
+      "openWorldHint": false
+    },
+    "_meta": null
+  },
+  {
+    "name": "github_mcp.get_git_status",
+    "title": null,
+    "description": "get git status",
+    "inputSchema": {
+      "properties": {
+        "job_id": {
+          "title": "Job Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "job_id"
+      ],
+      "title": "get_git_statusArguments",
+      "type": "object"
+    },
+    "execution": null,
+    "outputSchema": {
+      "properties": {
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        }
+      },
+      "required": [
+        "ok"
+      ],
+      "title": "ToolResult",
+      "type": "object"
+    },
+    "icons": null,
+    "annotations": {
+      "title": null,
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": null,
+      "openWorldHint": false
+    },
+    "_meta": null
+  },
+  {
+    "name": "github_mcp.list_recent_commits",
+    "title": null,
+    "description": "list recent commits",
+    "inputSchema": {
+      "properties": {
+        "repository": {
+          "title": "Repository",
+          "type": "string"
+        },
+        "limit": {
+          "default": 20,
+          "title": "Limit",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "repository"
+      ],
+      "title": "list_recent_commitsArguments",
+      "type": "object"
+    },
+    "execution": null,
+    "outputSchema": {
+      "properties": {
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        }
+      },
+      "required": [
+        "ok"
+      ],
+      "title": "ToolResult",
+      "type": "object"
+    },
+    "icons": null,
+    "annotations": {
+      "title": null,
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": null,
+      "openWorldHint": false
+    },
+    "_meta": null
+  },
+  {
+    "name": "github_mcp.check_contribution_eligibility",
+    "title": null,
+    "description": "check contribution eligibility",
+    "inputSchema": {
+      "properties": {
+        "repository": {
+          "title": "Repository",
+          "type": "string"
+        },
+        "branch": {
+          "title": "Branch",
+          "type": "string"
+        }
+      },
+      "required": [
+        "repository",
+        "branch"
+      ],
+      "title": "check_contribution_eligibilityArguments",
+      "type": "object"
+    },
+    "execution": null,
+    "outputSchema": {
+      "properties": {
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        }
+      },
+      "required": [
+        "ok"
+      ],
+      "title": "ToolResult",
+      "type": "object"
+    },
+    "icons": null,
+    "annotations": {
+      "title": null,
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": null,
+      "openWorldHint": false
+    },
+    "_meta": null
+  },
+  {
+    "name": "github_mcp.get_job_status",
+    "title": null,
+    "description": "get job status",
+    "inputSchema": {
+      "properties": {
+        "job_id": {
+          "title": "Job Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "job_id"
+      ],
+      "title": "get_job_statusArguments",
+      "type": "object"
+    },
+    "execution": null,
+    "outputSchema": {
+      "properties": {
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        }
+      },
+      "required": [
+        "ok"
+      ],
+      "title": "ToolResult",
+      "type": "object"
+    },
+    "icons": null,
+    "annotations": {
+      "title": null,
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": null,
+      "openWorldHint": false
+    },
+    "_meta": null
+  },
+  {
+    "name": "github_mcp.get_remote_status",
+    "title": null,
+    "description": "get remote status",
+    "inputSchema": {
+      "properties": {
+        "job_id": {
+          "title": "Job Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "job_id"
+      ],
+      "title": "get_remote_statusArguments",
+      "type": "object"
+    },
+    "execution": null,
+    "outputSchema": {
+      "properties": {
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        }
+      },
+      "required": [
+        "ok"
+      ],
+      "title": "ToolResult",
+      "type": "object"
+    },
+    "icons": null,
+    "annotations": {
+      "title": null,
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": null,
+      "openWorldHint": false
+    },
+    "_meta": null
+  },
+  {
+    "name": "github_mcp.get_job_report",
+    "title": null,
+    "description": "get job report",
+    "inputSchema": {
+      "properties": {
+        "job_id": {
+          "title": "Job Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "job_id"
+      ],
+      "title": "get_job_reportArguments",
+      "type": "object"
+    },
+    "execution": null,
+    "outputSchema": {
+      "properties": {
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        }
+      },
+      "required": [
+        "ok"
+      ],
+      "title": "ToolResult",
+      "type": "object"
+    },
+    "icons": null,
+    "annotations": {
+      "title": null,
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": null,
+      "openWorldHint": false
+    },
+    "_meta": null
+  },
+  {
+    "name": "github_mcp.create_job",
+    "title": null,
+    "description": "create job",
+    "inputSchema": {
+      "properties": {
+        "repository": {
+          "title": "Repository",
+          "type": "string"
+        },
+        "idempotency_key": {
+          "title": "Idempotency Key",
+          "type": "string"
+        },
+        "target_branch": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target Branch"
+        },
+        "expected_base_sha": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expected Base Sha"
+        },
+        "base_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Base Ref"
+        }
+      },
+      "required": [
+        "repository",
+        "idempotency_key"
+      ],
+      "title": "create_jobArguments",
+      "type": "object"
+    },
+    "execution": null,
+    "outputSchema": {
+      "properties": {
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        }
+      },
+      "required": [
+        "ok"
+      ],
+      "title": "ToolResult",
+      "type": "object"
+    },
+    "icons": null,
+    "annotations": {
+      "title": null,
+      "readOnlyHint": false,
+      "destructiveHint": false,
+      "idempotentHint": null,
+      "openWorldHint": false
+    },
+    "_meta": null
+  },
+  {
+    "name": "github_mcp.plan_changes",
+    "title": null,
+    "description": "plan changes",
+    "inputSchema": {
+      "properties": {
+        "job_id": {
+          "title": "Job Id",
+          "type": "string"
+        },
+        "messages": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Messages",
+          "type": "object"
+        }
+      },
+      "required": [
+        "job_id",
+        "messages"
+      ],
+      "title": "plan_changesArguments",
+      "type": "object"
+    },
+    "execution": null,
+    "outputSchema": {
+      "properties": {
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        }
+      },
+      "required": [
+        "ok"
+      ],
+      "title": "ToolResult",
+      "type": "object"
+    },
+    "icons": null,
+    "annotations": {
+      "title": null,
+      "readOnlyHint": false,
+      "destructiveHint": false,
+      "idempotentHint": null,
+      "openWorldHint": false
+    },
+    "_meta": null
+  },
+  {
+    "name": "github_mcp.write_file",
+    "title": null,
+    "description": "write file",
+    "inputSchema": {
+      "properties": {
+        "job_id": {
+          "title": "Job Id",
+          "type": "string"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "content": {
+          "title": "Content",
+          "type": "string"
+        },
+        "expected_checksum": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expected Checksum"
+        },
+        "encoding": {
+          "default": "utf-8",
+          "title": "Encoding",
+          "type": "string"
+        },
+        "executable": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Executable"
+        }
+      },
+      "required": [
+        "job_id",
+        "path",
+        "content"
+      ],
+      "title": "write_fileArguments",
+      "type": "object"
+    },
+    "execution": null,
+    "outputSchema": {
+      "properties": {
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        }
+      },
+      "required": [
+        "ok"
+      ],
+      "title": "ToolResult",
+      "type": "object"
+    },
+    "icons": null,
+    "annotations": {
+      "title": null,
+      "readOnlyHint": false,
+      "destructiveHint": false,
+      "idempotentHint": null,
+      "openWorldHint": false
+    },
+    "_meta": null
+  },
+  {
+    "name": "github_mcp.apply_patch",
+    "title": null,
+    "description": "Exact contextual replacement. Context must occur exactly once; never fuzzy apply.",
+    "inputSchema": {
+      "properties": {
+        "job_id": {
+          "title": "Job Id",
+          "type": "string"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "old_text": {
+          "title": "Old Text",
+          "type": "string"
+        },
+        "new_text": {
+          "title": "New Text",
+          "type": "string"
+        },
+        "expected_checksum": {
+          "title": "Expected Checksum",
+          "type": "string"
+        }
+      },
+      "required": [
+        "job_id",
+        "path",
+        "old_text",
+        "new_text",
+        "expected_checksum"
+      ],
+      "title": "apply_patchArguments",
+      "type": "object"
+    },
+    "execution": null,
+    "outputSchema": {
+      "properties": {
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        }
+      },
+      "required": [
+        "ok"
+      ],
+      "title": "ToolResult",
+      "type": "object"
+    },
+    "icons": null,
+    "annotations": {
+      "title": null,
+      "readOnlyHint": false,
+      "destructiveHint": false,
+      "idempotentHint": null,
+      "openWorldHint": false
+    },
+    "_meta": null
+  },
+  {
+    "name": "github_mcp.delete_file",
+    "title": null,
+    "description": "delete file",
+    "inputSchema": {
+      "properties": {
+        "job_id": {
+          "title": "Job Id",
+          "type": "string"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "expected_checksum": {
+          "title": "Expected Checksum",
+          "type": "string"
+        }
+      },
+      "required": [
+        "job_id",
+        "path",
+        "expected_checksum"
+      ],
+      "title": "delete_fileArguments",
+      "type": "object"
+    },
+    "execution": null,
+    "outputSchema": {
+      "properties": {
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        }
+      },
+      "required": [
+        "ok"
+      ],
+      "title": "ToolResult",
+      "type": "object"
+    },
+    "icons": null,
+    "annotations": {
+      "title": null,
+      "readOnlyHint": false,
+      "destructiveHint": true,
+      "idempotentHint": null,
+      "openWorldHint": false
+    },
+    "_meta": null
+  },
+  {
+    "name": "github_mcp.preview_job",
+    "title": null,
+    "description": "preview job",
+    "inputSchema": {
+      "properties": {
+        "job_id": {
+          "title": "Job Id",
+          "type": "string"
+        },
+        "offset": {
+          "default": 0,
+          "title": "Offset",
+          "type": "integer"
+        },
+        "limit": {
+          "default": 20,
+          "title": "Limit",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "job_id"
+      ],
+      "title": "preview_jobArguments",
+      "type": "object"
+    },
+    "execution": null,
+    "outputSchema": {
+      "properties": {
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        }
+      },
+      "required": [
+        "ok"
+      ],
+      "title": "ToolResult",
+      "type": "object"
+    },
+    "icons": null,
+    "annotations": {
+      "title": null,
+      "readOnlyHint": false,
+      "destructiveHint": false,
+      "idempotentHint": null,
+      "openWorldHint": false
+    },
+    "_meta": null
+  },
+  {
+    "name": "github_mcp.run_checks",
+    "title": null,
+    "description": "run checks",
+    "inputSchema": {
+      "properties": {
+        "job_id": {
+          "title": "Job Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "job_id"
+      ],
+      "title": "run_checksArguments",
+      "type": "object"
+    },
+    "execution": null,
+    "outputSchema": {
+      "properties": {
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        }
+      },
+      "required": [
+        "ok"
+      ],
+      "title": "ToolResult",
+      "type": "object"
+    },
+    "icons": null,
+    "annotations": {
+      "title": null,
+      "readOnlyHint": false,
+      "destructiveHint": false,
+      "idempotentHint": null,
+      "openWorldHint": false
+    },
+    "_meta": null
+  },
+  {
+    "name": "github_mcp.create_file_commits",
+    "title": null,
+    "description": "create file commits",
+    "inputSchema": {
+      "properties": {
+        "job_id": {
+          "title": "Job Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "job_id"
+      ],
+      "title": "create_file_commitsArguments",
+      "type": "object"
+    },
+    "execution": null,
+    "outputSchema": {
+      "properties": {
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        }
+      },
+      "required": [
+        "ok"
+      ],
+      "title": "ToolResult",
+      "type": "object"
+    },
+    "icons": null,
+    "annotations": {
+      "title": null,
+      "readOnlyHint": false,
+      "destructiveHint": false,
+      "idempotentHint": null,
+      "openWorldHint": false
+    },
+    "_meta": null
+  },
+  {
+    "name": "github_mcp.cancel_job",
+    "title": null,
+    "description": "cancel job",
+    "inputSchema": {
+      "properties": {
+        "job_id": {
+          "title": "Job Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "job_id"
+      ],
+      "title": "cancel_jobArguments",
+      "type": "object"
+    },
+    "execution": null,
+    "outputSchema": {
+      "properties": {
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        }
+      },
+      "required": [
+        "ok"
+      ],
+      "title": "ToolResult",
+      "type": "object"
+    },
+    "icons": null,
+    "annotations": {
+      "title": null,
+      "readOnlyHint": false,
+      "destructiveHint": false,
+      "idempotentHint": null,
+      "openWorldHint": false
+    },
+    "_meta": null
+  },
+  {
+    "name": "github_mcp.resume_job",
+    "title": null,
+    "description": "resume job",
+    "inputSchema": {
+      "properties": {
+        "job_id": {
+          "title": "Job Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "job_id"
+      ],
+      "title": "resume_jobArguments",
+      "type": "object"
+    },
+    "execution": null,
+    "outputSchema": {
+      "properties": {
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        }
+      },
+      "required": [
+        "ok"
+      ],
+      "title": "ToolResult",
+      "type": "object"
+    },
+    "icons": null,
+    "annotations": {
+      "title": null,
+      "readOnlyHint": false,
+      "destructiveHint": false,
+      "idempotentHint": null,
+      "openWorldHint": false
+    },
+    "_meta": null
+  },
+  {
+    "name": "github_mcp.publish_branch",
+    "title": null,
+    "description": "publish branch",
+    "inputSchema": {
+      "properties": {
+        "job_id": {
+          "title": "Job Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "job_id"
+      ],
+      "title": "publish_branchArguments",
+      "type": "object"
+    },
+    "execution": null,
+    "outputSchema": {
+      "properties": {
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        }
+      },
+      "required": [
+        "ok"
+      ],
+      "title": "ToolResult",
+      "type": "object"
+    },
+    "icons": null,
+    "annotations": {
+      "title": null,
+      "readOnlyHint": false,
+      "destructiveHint": true,
+      "idempotentHint": null,
+      "openWorldHint": true
+    },
+    "_meta": null
+  },
+  {
+    "name": "github_mcp.create_pull_request",
+    "title": null,
+    "description": "create pull request",
+    "inputSchema": {
+      "properties": {
+        "job_id": {
+          "title": "Job Id",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "job_id",
+        "title",
+        "description"
+      ],
+      "title": "create_pull_requestArguments",
+      "type": "object"
+    },
+    "execution": null,
+    "outputSchema": {
+      "properties": {
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        }
+      },
+      "required": [
+        "ok"
+      ],
+      "title": "ToolResult",
+      "type": "object"
+    },
+    "icons": null,
+    "annotations": {
+      "title": null,
+      "readOnlyHint": false,
+      "destructiveHint": false,
+      "idempotentHint": null,
+      "openWorldHint": true
+    },
+    "_meta": null
+  }
+]
