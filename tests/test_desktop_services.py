@@ -18,10 +18,12 @@ from github_ai_mcp.security.auth_mcp import LocalAuth
 def wait_health(controller):
     deadline = time.monotonic() + 30
     while time.monotonic() < deadline:
-        state = controller.status()
+        # Recovery is driven by poll(); a child may be temporarily absent
+        # while the previous owned process tree is being replaced.
+        state = controller.poll()
         if state["mcp"]["healthy"]:
             return state
-        if controller.children["mcp"][0].poll() is not None:
+        if controller.permanent["mcp"] or not controller.desired["mcp"]:
             pytest.fail(controller.logs())
         time.sleep(0.05)
     pytest.fail(controller.logs())
@@ -157,8 +159,18 @@ def test_lock_released_after_crashed_owner(tmp_path):
             with lock(tmp_path, "fixture"):
                 pass
         assert error.value.code == "BUSY"
-        child.kill()
+        import psutil
+        descendants = psutil.Process(child.pid).children(recursive=True)
+        for descendant in reversed(descendants):
+            try:
+                descendant.kill()
+            except psutil.NoSuchProcess:
+                pass
+        if child.poll() is None:
+            child.kill()
         child.wait(timeout=5)
+        _, still_running = psutil.wait_procs(descendants, timeout=5)
+        assert not still_running, "A descendant still owns the test lock"
         with lock(tmp_path, "fixture"):
             pass
     finally:
