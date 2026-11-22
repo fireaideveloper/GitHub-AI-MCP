@@ -235,7 +235,7 @@ def test_setup_shows_absolute_frozen_stdio_command(tmp_path, monkeypatch):
     assert not dialog.stdio.isReadOnly()
     assert 'GitHub-AI-MCP.exe' in dialog.stdio.text()
     assert '--internal-server' in dialog.stdio.text()
-    assert str(path.resolve()) in dialog.stdio.text()
+    assert path.resolve().as_posix() in dialog.stdio.text()
     assert dialog.stdio.text().endswith('serve --transport stdio')
     dialog.reject()
     app.processEvents()
