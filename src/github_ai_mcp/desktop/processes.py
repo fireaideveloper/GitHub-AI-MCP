@@ -102,7 +102,7 @@ class ProcessTree:
         elif os.name != "nt":
             import signal
             try:
-                os.killpg(self.process.pid, signal.SIGKILL)
+                cast(Any, os).killpg(self.process.pid, cast(Any, signal).SIGKILL)
             except ProcessLookupError:
                 pass
         elif self.process.poll() is None:
