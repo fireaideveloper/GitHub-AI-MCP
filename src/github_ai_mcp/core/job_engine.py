@@ -259,7 +259,7 @@ class Service:
                 if re.fullmatch(r"[0-9a-f]{8}-[0-9a-f-]{27,}", idempotency_key.lower()):
                     base_name = "task-" + ident[:8]
         target = base_name if automatic else target_branch
-        if not is_safe_task_branch(target) or len(target) > 120:
+        if target is None or not is_safe_task_branch(target) or len(target) > 120:
             raise AppError("PERMISSION_DENIED", "Target must be a safe task branch without a prefix")
         if target in {repo.default_branch, base_branch}:
             raise AppError("PERMISSION_DENIED", "Base/default branch publication forbidden")
