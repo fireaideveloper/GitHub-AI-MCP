@@ -12,6 +12,7 @@ import time
 from pathlib import Path
 
 import httpx
+import psutil
 
 from github_ai_mcp.config import load_config
 from github_ai_mcp.desktop.processes import ProcessTree, background_options
@@ -89,6 +90,19 @@ class Supervisor:
             r.raise_for_status()
             data = r.json()
         return data
+
+    def _health_pid_is_owned(self, pid):
+        child = self.children.get("mcp")
+        if not child or child[0].poll() is not None or type(pid) is not int:
+            return False
+        root_pid = child[0].pid
+        if pid == root_pid:
+            return True
+        try:
+            return any(process.pid == pid for process in
+                       psutil.Process(root_pid).children(recursive=True))
+        except (psutil.Error, OSError):
+            return False
 
     def start(self, name, retry=False):
         with self.mutex:
@@ -171,7 +185,7 @@ class Supervisor:
                     if name == "mcp":
                         try:
                             data = self._health()
-                            if data.get("instance") != hashlib.sha256(self.control.encode()).hexdigest() or data.get("pid") != process.pid:
+                            if data.get("instance") != hashlib.sha256(self.control.encode()).hexdigest() or not self._health_pid_is_owned(data.get("pid")):
                                 raise AppError("OWNERSHIP_FAILED", "Server identity mismatch")
                             with httpx.Client(timeout=2, trust_env=False) as client:
                                 response = client.post(f"http://127.0.0.1:{self.config.port}/_local/shutdown",
@@ -249,7 +263,7 @@ class Supervisor:
                 if desired and name == "mcp" and child and child[0].poll() is None and time.monotonic() - child[2] > 15:
                     try:
                         health = self._health()
-                        healthy = health.get("instance") == hashlib.sha256(self.control.encode()).hexdigest() and health.get("pid") == child[0].pid
+                        healthy = health.get("instance") == hashlib.sha256(self.control.encode()).hexdigest() and self._health_pid_is_owned(health.get("pid"))
                     except (AppError, httpx.HTTPError, ValueError):
                         healthy = False
                     if not healthy:
@@ -260,6 +274,12 @@ class Supervisor:
                     continue
                 if child:
                     child[1].close()
+                    if name == "mcp":
+                        # The Windows Job has been closed, but its descendants may
+                        # release the listening socket slightly later.
+                        deadline = time.monotonic() + 5
+                        while port_open(self.config.port) and time.monotonic() < deadline:
+                            time.sleep(0.1)
                     self.errors[name] = ("Service exited unexpectedly (exit " + str(child[0].returncode) + "). "
                                          + (self.last_output[name] or "Open service logs / Откройте журнал служб"))
                     self.error_codes[name] = "PROCESS_EXITED"
@@ -301,7 +321,7 @@ class Supervisor:
                 try:
                     data = self._health()
                     result["mcp"]["healthy"] = (data.get("instance") == hashlib.sha256(self.control.encode()).hexdigest() and
-                                                  data.get("pid") == result["mcp"]["pid"])
+                                                  self._health_pid_is_owned(data.get("pid")))
                 except (AppError, httpx.HTTPError, ValueError):
                     pass
                 if not result["mcp"]["healthy"]:
