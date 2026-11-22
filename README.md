@@ -1,49 +1,46 @@
 # GitHub-AI-MCP
 
-Desktop-oriented GitHub MCP project for controlled repository changes, task-based branches, local review, and pull requests.
+Desktop GitHub MCP tools with local review, protected credentials, diagnostics,
+background service supervision and opt-in Windows logon startup.
 
-> **Work in progress — staged publication.** This repository currently contains the project metadata, security modules, Git and GitHub clients, persistent job storage, and basic desktop service utilities. The application is **not yet runnable** from this repository; remaining source, tests, and build scripts will follow in reviewed changes.
+The Windows distribution is **one `GitHub-AI-MCP.exe`**. It opens the GUI and
+runs MCP workers using the same executable. Internal vendor programs are
+extracted automatically into PyInstaller's temporary directory. Configuration,
+logs and database live in `%LOCALAPPDATA%\GitHub-AI-MCP`; credentials use the OS vault.
 
-## Planned capabilities
+## Build on Windows
 
-- MCP tools for reviewing repository changes and publishing pull requests.
-- Separate branches per task, with one changed file per commit.
-- Desktop controls, background services, and OS-vault-protected credentials.
-- A Windows single-executable distribution after native validation.
+Developer tools are needed only to build; users of the EXE need no Python or Git installation.
 
-## Published so far
+```powershell
+uv sync --frozen --extra gui --extra dev
+uv pip install --python .venv/Scripts/python.exe -r launcher/build-requirements.txt
+.venv/Scripts/python.exe scripts/build.py
+```
 
-- `pyproject.toml` — package metadata and pinned dependencies.
-- `.gitignore` — exclusions for local environments, sensitive configuration, and builds.
-- `.env.example` — empty placeholder, with no credentials or comment-only configuration.
-- `LICENSE` — MIT license.
-- `src/github_ai_mcp/__init__.py` — Python package initialization.
-- `src/github_ai_mcp/exceptions.py` — stable application error codes.
-- `src/github_ai_mcp/config.py` — validated local application configuration.
-- `src/github_ai_mcp/core/locking.py` — cross-process operation locks.
-- `src/github_ai_mcp/desktop/streams.py` — inherited standard streams in the Windows executable.
-- `src/github_ai_mcp/security/paths.py` — canonical path validation and symlink protection.
-- `src/github_ai_mcp/security/secret_scan.py` — detection and redaction of credential-like content.
-- `src/github_ai_mcp/security/auth_github.py` — GitHub credential storage through the OS vault.
-- `src/github_ai_mcp/security/auth_mcp.py` — localhost MCP authorization and rate limiting.
-- `src/github_ai_mcp/security/policy.py` — repository authorization and publishing policy.
+First prepare the vendor input described in [RELEASE_BUILD.md](docs/RELEASE_BUILD.md).
+It is absent from the supplied source archive. The build deliberately fails if
+Git, gh or the official tunnel client is missing; it does not produce a partial
+application disguised as standalone. Use `--runtime-dir C:/approved-runtime` for
+an input outside the repository. Default output: `dist/GitHub-AI-MCP.exe` only.
+No installers, ZIPs, checksum/signature reports or permanent build tree are generated.
 
-- `src/github_ai_mcp/core/git_engine.py` — hardened Git execution and repository inspection.
-- `src/github_ai_mcp/core/github_api.py` — authenticated GitHub REST client.
-- `src/github_ai_mcp/storage/database.py` — SQLite job persistence, approvals, and audit history.
-- `src/github_ai_mcp/desktop/control.py` — protected local health and shutdown routes.
-- `src/github_ai_mcp/desktop/runtime.py` — executable resource and service command handling.
-- `src/github_ai_mcp/desktop/prerequisites.py` — dependency and credential-vault diagnostics.
-- `src/github_ai_mcp/desktop/processes.py` — isolated subprocesses and Windows process-tree handling.
+Run by double-clicking the EXE. Enable/disable logon startup in Setup; it uses
+one HKCU Run value pointing to this same EXE. After moving the EXE, re-enable
+startup and repair the tunnel's MCP command in Setup. Existing user data stays in place.
+Closing the window can leave the application in the tray; use Exit to stop its services.
 
-## Next stages
+Source development: `.venv/Scripts/python.exe -m github_ai_mcp.desktop.entry`.
+Source tests: `uv run --frozen --extra gui --extra dev pytest -q`.
+Packaged CLI: `GitHub-AI-MCP.exe --cli --config <path> doctor` with output redirected
+or captured by a caller; the EXE never allocates a console.
 
-Next publish job orchestration, the MCP server and CLI, desktop GUI and tunnel supervision, tests, and packaging tools.
+See [task-based branch naming](docs/BRANCH_NAMING.md),
+[Russian guide](docs/USER_GUIDE_RU.md), [English guide](docs/USER_GUIDE_EN.md),
+[MCP connection](docs/MCP_CONNECTION.md), [security model](docs/SECURITY_MODEL.md),
+[licensing](docs/LICENSE_COMPLIANCE.md), and [Windows acceptance](docs/WINDOWS_SMOKE_TEST.md).
 
-## Security and development status
-
-Python 3.12+ is required. Do not commit real tokens, private configuration, databases, vendor binaries, or build outputs. The published source subset cannot run a complete CLI, MCP server, or desktop application; some newly published modules depend on components not yet available in this repository. Native Windows compilation and end-to-end validation remain outstanding.
-
-## Source code style
-
-All Python source code in this repository must remain free of inline comments, standalone comments, and documentation-only docstrings. Future changes should follow the same convention. Keep project explanations in the README or other documentation files, not in source code comments.
+This delivery was verified on Linux. Native Windows compilation, inherited stdio
+handles, tray behavior, vendor binaries, live GitHub/tunnel and clean-machine
+portability still require native testing. A successful source test suite is not
+Windows certification.
