@@ -7,6 +7,7 @@
 <p align="center"><strong>AI-разработка на GitHub с локальной проверкой и контролируемой публикацией.</strong></p>
 <p align="center">
   <a href="README.md">English</a> ·
+  <a href="docs/QUICKSTART_RU.md">Быстрый старт</a> ·
   <a href="docs/USER_GUIDE_RU.md">Руководство</a> ·
   <a href="docs/API_REFERENCE.md">API</a> ·
   <a href="docs/SECURITY_MODEL.md">Безопасность</a> ·
@@ -18,6 +19,20 @@
 GitHub-AI-MCP — настольное приложение и сервер Model Context Protocol для управляемой работы AI с GitHub. Оно объединяет локальную проверку изменений, защиту учётных данных, диагностику и управление фоновыми службами. Встроенной языковой модели нет; для локальных операций Git/MCP ключ OpenAI API не требуется.
 
 **Дистрибутив:** один `GitHub-AI-MCP.exe` для Windows. Пользователю готового EXE не нужно отдельно устанавливать Python или Git.
+
+## Быстрый старт
+
+[![Начать — подготовка, сборка, настройка и подключение](assets/readme/quickstart-ru.svg)](docs/QUICKSTART_RU.md)
+
+**[Открыть пошаговую инструкцию Windows →](docs/QUICKSTART_RU.md)** · [English version](docs/QUICKSTART_EN.md)
+
+| Ваша цель | С чего начать |
+| --- | --- |
+| Собрать собственный EXE | [Инструменты, загрузки и vendor](docs/QUICKSTART_RU.md) |
+| Работать с GitHub локально | [Первый запуск и авторизация](docs/QUICKSTART_RU.md#4--первый-запуск-и-доступ-к-github) |
+| Подключить ChatGPT приватно | [Secure MCP Tunnel](docs/QUICKSTART_RU.md#5--создайте-необязательный-приватный-secure-mcp-tunnel) |
+
+Для локальной работы туннель необязателен. Текущий сборщик требует все vendor-компоненты; наличие публичного EXE зависит от релиза и лицензионной проверки.
 
 ## Возможности
 
