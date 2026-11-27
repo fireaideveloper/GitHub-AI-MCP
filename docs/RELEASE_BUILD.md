@@ -1,5 +1,7 @@
 # Single-executable Windows build
 
+New to the project? Start with [Windows quickstart (EN)](QUICKSTART_EN.md) or [быстрый старт (RU)](QUICKSTART_RU.md) for installation, official downloads, profile configuration and first-run checks.
+
 Build on native Windows x64 with Python 3.12 and the locked environment.
 PyInstaller cannot cross-compile a Windows executable from this Linux delivery.
 
@@ -22,7 +24,7 @@ vendor/
   ...                   vendor notices and required companion resources
 ```
 
-Do not copy installed application profiles, YAML credentials, PATs, user data,
+Use a clean extracted PortableGit archive, not an installed Git directory. Do not copy uninstall artifacts (`unins000.*`) or record absolute personal paths in `LICENSES.txt`; use relative paths. Do not copy installed application profiles, YAML credentials, PATs, user data,
 private signing material or your entire development environment. The required
 file check validates presence and PE signatures; it cannot prove completeness,
 trustworthiness or licensing of a vendor distribution. Preserve the full
