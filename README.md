@@ -118,6 +118,12 @@ The packaged EXE does not allocate a console; redirect/capture CLI output. Start
 | [GitHub authentication](docs/GITHUB_AUTH.md) | [Branch naming](docs/BRANCH_NAMING.md) |
 | [Windows acceptance](docs/WINDOWS_SMOKE_TEST.md) | [License compliance](docs/LICENSE_COMPLIANCE.md) |
 
+## Community and feedback
+
+Trying GitHub-AI-MCP? Share your experience with the Windows setup or MCP integration in the [early-user feedback thread](https://github.com/fireaideveloper/GitHub-AI-MCP/issues/8). Feature requests and reproducible bug reports are welcome through [Issues](https://github.com/fireaideveloper/GitHub-AI-MCP/issues).
+
+If this project is useful to you, consider starring it on GitHub. Please never include credentials, private repository data or unredacted logs in public feedback.
+
 ## Contributing and license
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) and [CHANGELOG.md](CHANGELOG.md). Released under the [MIT license](LICENSE); bundled third-party components have their own licensing obligations.
