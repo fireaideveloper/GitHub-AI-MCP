@@ -1,16 +1,71 @@
+<p align="center">
+  <img src="assets/readme/hero.svg" alt="GitHub-AI-MCP — local control for AI-assisted GitHub workflows; Python 3.12+, Windows, MCP, MIT, v1.0.1" width="100%">
+</p>
+
 # GitHub-AI-MCP
 
-Desktop GitHub MCP tools with local review, protected credentials, diagnostics,
-background service supervision and opt-in Windows logon startup.
+<p align="center"><strong>AI-assisted GitHub development, with local review and policy-controlled publication.</strong></p>
+<p align="center">
+  <a href="README_RU.md">Русский</a> ·
+  <a href="docs/USER_GUIDE_EN.md">User guide</a> ·
+  <a href="docs/API_REFERENCE.md">API reference</a> ·
+  <a href="docs/SECURITY_MODEL.md">Security</a> ·
+  <a href="LICENSE">MIT license</a>
+</p>
 
-The Windows distribution is **one `GitHub-AI-MCP.exe`**. It opens the GUI and
-runs MCP workers using the same executable. Internal vendor programs are
-extracted automatically into PyInstaller's temporary directory. Configuration,
-logs and database live in `%LOCALAPPDATA%\GitHub-AI-MCP`; credentials use the OS vault.
+---
+
+GitHub-AI-MCP is a desktop application and Model Context Protocol (MCP) server for controlled GitHub development. It combines local review, protected credentials, diagnostics and background service supervision with a policy-enforced Git workflow. It does not include an LLM or require an OpenAI API key for local Git/MCP work.
+
+**Distribution:** one `GitHub-AI-MCP.exe` for Windows. The source project is Python 3.12+; end users of the built EXE need no separate Python or Git installation.
+
+[Features](#features) · [Architecture](#architecture) · [Workflow](#workflow) · [Security](#security) · [Build on Windows](#build-on-windows) · [Usage](#usage) · [Documentation](#documentation)
+
+## Features
+
+| Capability | What it provides |
+| :--- | :--- |
+| **MCP connectivity** | Local stdio, authenticated loopback Streamable HTTP and an optional existing official Secure MCP Tunnel profile. |
+| **Local review** | Preview changes and bind approval to a specific snapshot, paths and messages. |
+| **Precise Git history** | Exactly one genuinely changed path per commit; verify the final tree before publication. |
+| **Repository policy** | Repository allowlists, path validation, secret detection and controlled push/PR operations. |
+| **Desktop control** | Local setup, diagnostics, background service supervision, optional tray and Windows logon startup. |
+| **Recovery** | Durable job state, ref reconciliation and metadata audit records. |
+
+## Architecture
+
+![Architecture: MCP clients, local service and policy, isolated Git clones and GitHub API](assets/readme/architecture.svg)
+
+The GUI and CLI share the same service; MCP tools are wrappers around its Git and job engines. Local HTTP and tunnel stdio are independent transports. The tunnel is optional and requires an authorized, existing vendor profile. See [architecture](docs/ARCHITECTURE.md) and [MCP connection](docs/MCP_CONNECTION.md).
+
+## Workflow
+
+![Plan, preview, review, commit, verify and publish](assets/readme/workflow.svg)
+
+The engine freezes the desired tree and validates every commit against the approved plan. Publication additionally requires the configured checks, permissions and remote expectations. Default-branch and force pushes are forbidden by the application. No empty commits or fabricated timestamps are produced by the engine. See [commit semantics](docs/COMMIT_SEMANTICS.md) and [branch naming](docs/BRANCH_NAMING.md).
+
+## Security
+
+![Repository policy, snapshot approvals, OS credential vault, recovery and audit](assets/readme/security.svg)
+
+- GitHub and tunnel credentials use the OS vault; the local HTTP endpoint uses a separate token and binds to loopback.
+- MCP tools cannot alter local administration or approvals; sensitive paths and detected credentials are denied.
+- Configured host commands are **not sandboxed**. The local OS account is a trusted boundary; secret detection is heuristic.
+
+Read the full [security model](docs/SECURITY_MODEL.md) and [security policy](SECURITY.md) before enabling write access.
 
 ## Build on Windows
 
-Developer tools are needed only to build; users of the EXE need no Python or Git installation.
+> [!IMPORTANT]
+> Native Windows packaging and live GitHub/tunnel acceptance have not been verified by the original Linux delivery. A passing source suite is not Windows certification. See the [Windows acceptance checklist](docs/WINDOWS_SMOKE_TEST.md).
+
+### 1. Prepare the vendor runtime
+
+Follow [RELEASE_BUILD.md](docs/RELEASE_BUILD.md) for the approved Git, GitHub CLI (`gh`) and official tunnel-client inputs. These binaries are absent from the supplied source archive; the build deliberately fails when an input is missing rather than producing a partial standalone application.
+
+### 2. Build the executable
+
+From the repository root in PowerShell:
 
 ```powershell
 uv sync --frozen --extra gui --extra dev
@@ -18,29 +73,40 @@ uv pip install --python .venv/Scripts/python.exe -r launcher/build-requirements.
 .venv/Scripts/python.exe scripts/build.py
 ```
 
-First prepare the vendor input described in [RELEASE_BUILD.md](docs/RELEASE_BUILD.md).
-It is absent from the supplied source archive. The build deliberately fails if
-Git, gh or the official tunnel client is missing; it does not produce a partial
-application disguised as standalone. Use `--runtime-dir C:/approved-runtime` for
-an input outside the repository. Default output: `dist/GitHub-AI-MCP.exe` only.
-No installers, ZIPs, checksum/signature reports or permanent build tree are generated.
+Use `--runtime-dir C:/approved-runtime` on the build command for an external runtime input. The default output is **only** `dist/GitHub-AI-MCP.exe` (no installer, ZIP, checksum/signature report or permanent build tree).
 
-Run by double-clicking the EXE. Enable/disable logon startup in Setup; it uses
-one HKCU Run value pointing to this same EXE. After moving the EXE, re-enable
-startup and repair the tunnel's MCP command in Setup. Existing user data stays in place.
-Closing the window can leave the application in the tray; use Exit to stop its services.
+### 3. Launch and configure
 
-Source development: `.venv/Scripts/python.exe -m github_ai_mcp.desktop.entry`.
-Source tests: `uv run --frozen --extra gui --extra dev pytest -q`.
-Packaged CLI: `GitHub-AI-MCP.exe --cli --config <path> doctor` with output redirected
-or captured by a caller; the EXE never allocates a console.
+Double-click the EXE, open Setup and configure the required services. Logon startup is opt-in and uses one per-user HKCU Run value. After moving the EXE, re-enable startup and repair the tunnel MCP command in Setup. User data stays in place. Closing the window may leave it in the tray; use **Exit** to stop its services.
 
-See [task-based branch naming](docs/BRANCH_NAMING.md),
-[Russian guide](docs/USER_GUIDE_RU.md), [English guide](docs/USER_GUIDE_EN.md),
-[MCP connection](docs/MCP_CONNECTION.md), [security model](docs/SECURITY_MODEL.md),
-[licensing](docs/LICENSE_COMPLIANCE.md), and [Windows acceptance](docs/WINDOWS_SMOKE_TEST.md).
+The same executable dispatches the GUI and internal MCP workers. Vendor resources are extracted automatically to PyInstaller's temporary directory. Configuration, logs and database live in `%LOCALAPPDATA%\GitHub-AI-MCP`; credentials remain in the OS vault.
 
-This delivery was verified on Linux. Native Windows compilation, inherited stdio
-handles, tray behavior, vendor binaries, live GitHub/tunnel and clean-machine
-portability still require native testing. A successful source test suite is not
-Windows certification.
+## Usage
+
+| Task | Entry point |
+| :--- | :--- |
+| Source desktop development | `.venv/Scripts/python.exe -m github_ai_mcp.desktop.entry` |
+| Source test suite | `uv run --frozen --extra gui --extra dev pytest -q` |
+| Packaged diagnostics | `GitHub-AI-MCP.exe --cli --config <path> doctor` |
+| MCP client setup | [Connection guide](docs/MCP_CONNECTION.md) |
+
+The packaged EXE does not allocate a console; redirect/capture CLI output. Start with read-only operations and verify health before enabling writes. Remote connectivity needs an actual remote read-only invocation, not merely a running tunnel process.
+
+## Documentation
+
+| Getting started | Engineering and trust |
+| :--- | :--- |
+| [English guide](docs/USER_GUIDE_EN.md) · [Russian guide](docs/USER_GUIDE_RU.md) | [Architecture](docs/ARCHITECTURE.md) |
+| [MCP connection](docs/MCP_CONNECTION.md) | [API reference](docs/API_REFERENCE.md) |
+| [Release build](docs/RELEASE_BUILD.md) | [Commit semantics](docs/COMMIT_SEMANTICS.md) |
+| [Troubleshooting (RU)](docs/TROUBLESHOOTING_RU.md) | [Security model](docs/SECURITY_MODEL.md) |
+| [GitHub authentication](docs/GITHUB_AUTH.md) | [Branch naming](docs/BRANCH_NAMING.md) |
+| [Windows acceptance](docs/WINDOWS_SMOKE_TEST.md) | [License compliance](docs/LICENSE_COMPLIANCE.md) |
+
+## Contributing and license
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) and [CHANGELOG.md](CHANGELOG.md). Released under the [MIT license](LICENSE); bundled third-party components have their own licensing obligations.
+
+---
+
+<p align="center"><sub>GitHub-AI-MCP · Local control. Explicit review. Verifiable changes.</sub></p>
