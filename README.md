@@ -7,6 +7,7 @@
 <p align="center"><strong>AI-assisted GitHub development, with local review and policy-controlled publication.</strong></p>
 <p align="center">
   <a href="README_RU.md">Русский</a> ·
+  <a href="docs/QUICKSTART_EN.md">Quickstart</a> ·
   <a href="docs/USER_GUIDE_EN.md">User guide</a> ·
   <a href="docs/API_REFERENCE.md">API reference</a> ·
   <a href="docs/SECURITY_MODEL.md">Security</a> ·
@@ -19,7 +20,21 @@ GitHub-AI-MCP is a desktop application and Model Context Protocol (MCP) server f
 
 **Distribution:** one `GitHub-AI-MCP.exe` for Windows. The source project is Python 3.12+; end users of the built EXE need no separate Python or Git installation.
 
-[Features](#features) · [Architecture](#architecture) · [Workflow](#workflow) · [Security](#security) · [Build on Windows](#build-on-windows) · [Usage](#usage) · [Documentation](#documentation)
+[Getting started](#getting-started) · [Features](#features) · [Architecture](#architecture) · [Workflow](#workflow) · [Security](#security) · [Build on Windows](#build-on-windows) · [Usage](#usage) · [Documentation](#documentation)
+
+## Getting started
+
+[![Start here — prepare, build, configure and connect](assets/readme/quickstart-en.svg)](docs/QUICKSTART_EN.md)
+
+**[Start the step-by-step Windows guide →](docs/QUICKSTART_EN.md)** · [Русская версия](docs/QUICKSTART_RU.md)
+
+| Your goal | Start here |
+| --- | --- |
+| Build my own Windows EXE | [Tools, downloads and vendor setup](docs/QUICKSTART_EN.md) |
+| Use GitHub locally | [First launch and authorization](docs/QUICKSTART_EN.md#4--first-launch-and-github-access) |
+| Connect ChatGPT privately | [Secure MCP Tunnel](docs/QUICKSTART_EN.md#5--create-an-optional-private-secure-mcp-tunnel) |
+
+The tunnel is optional for local use. All vendor inputs are required for the current one-file build; public binary availability depends on release and license review.
 
 ## Features
 
