@@ -1,5 +1,7 @@
 # Version 1.0.1 update
 
+For a complete first-time setup, follow the [English quickstart](QUICKSTART_EN.md) or [Russian quickstart](QUICKSTART_RU.md).
+
 Use [current setup guide](USER_GUIDE_EN.md) for secure vault and profile repair. Historical manual examples below are optional and are not the normal startup workflow.
 
 # Packaged stdio and source compatibility
@@ -47,7 +49,7 @@ Claude Desktop and other clients with local stdio support can start this executa
 
 ## Local Streamable HTTP (working, authenticated)
 
-1. Run `github-ai-mcp auth-mcp` locally, or launcher option 6; securely copy the generated token into your client's secret store. This is not the GitHub PAT.
+1. Run `github-ai-mcp auth-mcp` locally, or use Setup to generate/copy the local MCP token; securely copy the generated token into your client's secret store. This is not the GitHub PAT.
 2. Run `github-ai-mcp serve --transport streamable-http` or GUI Start MCP.
 3. Configure the client's Streamable HTTP URL as `http://127.0.0.1:8766/mcp` and its Authorization header as `Bearer <MCP token>`.
 4. Call `github_mcp.health_check` and `github_mcp.list_repositories` before writes. Missing bearer token returns 401. A GET without proper MCP headers is not a health check.
@@ -56,7 +58,7 @@ The server is loopback-only with Host/Origin checks. A client that cannot supply
 
 ## ChatGPT through the official private Secure MCP Tunnel
 
-A ChatGPT cloud connection cannot ordinarily reach a Windows localhost URL directly. Current official OpenAI documentation provides an outbound-only Secure MCP Tunnel for supported products. This source supervises an existing official client/profile and stores its runtime key in an approved OS vault. It does not bundle the vendor client or create cloud tunnels. Live ChatGPT integration has not been tested here.
+A ChatGPT cloud connection cannot ordinarily reach a Windows localhost URL directly. Current official OpenAI documentation provides an outbound-only Secure MCP Tunnel for supported products. This source supervises an existing official client/profile and stores its runtime key in an approved OS vault. The source checkout does not contain the vendor client; the Windows build embeds the developer-supplied official client. The application does not create cloud tunnels. Live ChatGPT integration has not been tested here.
 
 Prerequisites: access to Platform tunnel settings, the appropriate Tunnels Read/Manage/Use roles, a tunnel associated with your target ChatGPT workspace, and permission to add custom MCP servers. Your subscription alone is not a guarantee of these permissions. A tunnel-client runtime API key is separate from both application credentials.
 
