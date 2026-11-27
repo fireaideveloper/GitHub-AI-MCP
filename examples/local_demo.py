@@ -1,6 +1,7 @@
 """Actual offline Git commits and local bare-remote push. Never contacts GitHub."""
 import json
 import tempfile
+import time
 from pathlib import Path
 
 from github_ai_mcp.config import Config, Grant, Repository
@@ -22,12 +23,16 @@ def run_demo(root: Path):
     git.run(root, "init", "--bare", "--initial-branch=main", str(remote))
     git.run(source, "remote", "add", "origin", str(remote))
     git.run(source, "push", "origin", "main")
+    # Keep the demo grant scoped to its disposable local repository and task branch.
+    branch = "ai/demo-five-paths"
     config = Config(data_dir=root / "state", mode="AUTO_APPROVED",
                     repositories={"demo/local": Repository(source=str(remote), author_name="Offline Demo",
                                                           author_email="demo@example.invalid", identity_authorized=True)},
-                    grants=[Grant(repository="demo/local", actions=["commit", "push"], expires_at=4102444800)])
+                    grants=[Grant(repository="demo/local", branch_prefix=branch,
+                                  actions=["commit", "push"], expires_at=time.time() + 3600,
+                                  max_files=5)])
     svc = Service(config)
-    job = svc.create_job("demo/local", "demo-five-paths")
+    job = svc.create_job("demo/local", "demo-five-paths", target_branch=branch)
     names = ["src/a.txt", "src/b.txt", "tests/test.txt", "документы/привет 🌍.txt", "README.md"]
     svc.plan_changes(job["id"], {p: "feat: update " + p for p in names})
     for path in names:
@@ -43,4 +48,4 @@ def run_demo(root: Path):
 
 
 if __name__ == "__main__":
-    print(json.dumps(run_demo(Path(tempfile.mkdtemp(prefix="github-ai-demo-"))), ensure_ascii=False, indent=2))
+    print(json.dumps(run_demo(Path(tempfile.mkdtemp(prefix="github-ai-demo-"))), ensure_ascii=True, indent=2))
