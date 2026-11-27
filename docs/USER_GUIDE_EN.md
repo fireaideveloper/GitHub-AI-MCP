@@ -1,7 +1,7 @@
 # GitHub-AI-MCP 1.0.1 — startup and tunnel guide
 
-Build on Windows with `uv sync --frozen --extra gui --extra dev`, then
-`python scripts/build.py`; see RELEASE_BUILD.md for required vendor inputs.
+Start with the [Windows quickstart](QUICKSTART_EN.md) for developer tools, vendor downloads,
+locked dependencies, the one-file build and first-run configuration.
 The single EXE needs no Python installation. Native Windows packaging has not been run in this Linux session.
 
 Open Setup. Select the official tunnel executable and an existing YAML using Browse.
@@ -18,9 +18,9 @@ are not imported. Replace a key by entering a new one and saving; remove it with
 dedicated button. Keys are not redisplayed. Expired/rejected credentials require repair.
 
 The two MCP transports are independent: authenticated loopback HTTP is owned by the GUI;
-the tunnel launches a dedicated stdio server sidecar. Source mode uses the current Python
-module. Frozen mode uses the sibling console server executable. Paths and arguments are
-quoted, and the GUI executable is never used for stdio.
+the tunnel launches a separate stdio worker process. Source mode uses the current Python
+module. Frozen mode uses the same `GitHub-AI-MCP.exe` with `--internal-server`,
+`--config` and `serve --transport stdio`; no sibling console EXE is required.
 
 A live tunnel process does not prove remote availability. Owned-process health is read
 only from a loopback listener attributed to that PID. Recent local component observations
@@ -47,10 +47,9 @@ Manual Start resets attempts after repairs. Known authentication rejection from 
 owned process stops it. Network recovery inside a running vendor client remains vendor-managed.
 
 After moving or updating the application, repair startup registration and the YAML MCP
-command. Source environments need dependency reinstall after relocation. Preserve the
-entire frozen folder. Exit using the application's menu to stop owned services. To remove
-a portable install, disable startup and optionally remove the runtime key first. Installer
-uninstall removes its startup value and retains user data/vault credentials. Repository
+command. Source environments need dependency reinstall after relocation. Keep the single EXE at its configured path. Exit using the application's menu to stop owned services.
+To remove the portable application, disable startup, optionally remove the runtime key,
+exit and delete the EXE. User data and remaining vault credentials are retained. Repository
 permissions and policy mode are unchanged. Duplicate GUI launches are rejected by the
 existing kernel-owned lock; they do not focus an existing window.
 
