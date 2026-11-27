@@ -105,6 +105,12 @@ EXE не открывает консоль: вывод CLI необходимо 
 | [Авторизация GitHub](docs/GITHUB_AUTH.md) | [Имена веток](docs/BRANCH_NAMING.md) |
 | [Проверка Windows](docs/WINDOWS_SMOKE_TEST.md) | [Лицензии компонентов](docs/LICENSE_COMPLIANCE.md) |
 
+## Сообщество и обратная связь
+
+Попробовали GitHub-AI-MCP? Расскажите об опыте сборки Windows или настройки MCP в [теме обратной связи](https://github.com/fireaideveloper/GitHub-AI-MCP/issues/8). Предложения и воспроизводимые ошибки можно оставлять в [Issues](https://github.com/fireaideveloper/GitHub-AI-MCP/issues).
+
+Если проект оказался полезен, поставьте ему звезду на GitHub. Не публикуйте ключи, данные приватных репозиториев и необработанные журналы.
+
 ## Участие в проекте и лицензия
 
 [Правила участия](CONTRIBUTING.md) · [История изменений](CHANGELOG.md) · [MIT](LICENSE). Сторонние компоненты имеют собственные лицензионные условия.
