@@ -2,16 +2,17 @@
 import functools
 import inspect
 import json
-from typing import Any
+from typing import Annotated, Any
 
 from mcp.server import MCPServer
 from mcp.types import ToolAnnotations
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from github_ai_mcp.core.job_engine import Service
 from github_ai_mcp.exceptions import AppError
 from github_ai_mcp.security.auth_mcp import LocalAuth
 from github_ai_mcp.security.auth_github import get_secret
+from github_ai_mcp.tool_definitions import TOOL_DEFINITIONS
 
 READ = ["health_check", "list_repositories", "get_repository_info", "list_branches", "list_tree",
         "read_file", "read_files_batch", "get_diff", "get_git_status", "list_recent_commits",
@@ -35,8 +36,9 @@ def build_server(service: Service) -> MCPServer:
                                      "the server creates a unique lowercase branch without ai/ or mcp/ prefixes."))
     for name in READ + WRITE:
         function = getattr(service, name)
+        description, parameter_docs = TOOL_DEFINITIONS[name]
 
-        def adapt(fn):
+        def adapt(fn, docs):
             @functools.wraps(fn)
             def call(*args, **kwargs):
                 try:
@@ -46,13 +48,20 @@ def build_server(service: Service) -> MCPServer:
                 except Exception:
                     return ToolResult(ok=False, error_code="INTERNAL_ERROR",
                                       message="Operation failed safely; inspect local diagnostics")
-            setattr(call, "__signature__", inspect.signature(fn).replace(return_annotation=ToolResult))
+            signature = inspect.signature(fn)
+            parameters = [
+                parameter.replace(annotation=Annotated[parameter.annotation, Field(description=docs[parameter.name])])
+                for parameter in signature.parameters.values()
+            ]
+            setattr(call, "__signature__", signature.replace(parameters=parameters, return_annotation=ToolResult))
+            call.__annotations__ = {p.name: p.annotation for p in parameters}
+            call.__annotations__["return"] = ToolResult
             return call
-        server.add_tool(adapt(function), name="github_mcp." + name, structured_output=True,
-                        description=(function.__doc__ or name.replace("_", " ")),
+        server.add_tool(adapt(function, parameter_docs), name="github_mcp." + name, structured_output=True,
+                        description=description,
                         annotations=ToolAnnotations(read_only_hint=name in READ,
-                                                    destructive_hint=name in {"delete_file", "publish_branch"},
-                                                    open_world_hint=name in {"publish_branch", "create_pull_request"}))
+                                                    destructive_hint=name in {"write_file", "apply_patch", "delete_file", "cancel_job", "publish_branch", "resume_job", "run_checks"},
+                                                    open_world_hint=name in {"get_repository_info", "list_branches", "list_tree", "read_file", "read_files_batch", "list_recent_commits", "check_contribution_eligibility", "get_remote_status", "create_job", "run_checks", "resume_job", "publish_branch", "create_pull_request"}))
 
     @server.resource("github-ai://policy", mime_type="application/json")
     def policy() -> str:
