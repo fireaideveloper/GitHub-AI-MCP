@@ -1,0 +1,67 @@
+name: MCP registry package
+on:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish to PyPI and official MCP Registry (main only)
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  verify:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --frozen --extra gui --extra dev
+      - run: uv run --frozen --extra gui --extra dev pytest -q
+      - run: uv build
+      - run: uvx --from twine twine check dist/*
+      - run: python scripts/check_registry_package.py
+      - shell: bash
+        run: |
+          uv venv .package-test --python 3.12
+          uv pip install --python .package-test dist/*.whl
+          uv run --no-project --python .package-test github-ai-mcp --help
+  publish-pypi:
+    if: github.event_name == 'workflow_dispatch' && inputs.publish && github.ref == 'refs/heads/main'
+    needs: verify
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv build
+      - run: python scripts/check_registry_package.py
+      - uses: pypa/gh-action-pypi-publish@release/v1
+  publish-registry:
+    if: github.event_name == 'workflow_dispatch' && inputs.publish && github.ref == 'refs/heads/main'
+    needs: publish-pypi
+    runs-on: ubuntu-latest
+    environment: mcp-registry
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install publisher from reviewed release
+        env:
+          PUBLISHER_TAG: ${{ vars.MCP_PUBLISHER_TAG }}
+          PUBLISHER_SHA256: ${{ vars.MCP_PUBLISHER_SHA256 }}
+        run: |
+          set -euo pipefail
+          [[ "$PUBLISHER_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          [[ "$PUBLISHER_SHA256" =~ ^[a-fA-F0-9]{64}$ ]]
+          curl --fail --location --silent --show-error "https://github.com/modelcontextprotocol/registry/releases/download/$PUBLISHER_TAG/mcp-publisher_linux_amd64.tar.gz" -o publisher.tar.gz
+          echo "$PUBLISHER_SHA256  publisher.tar.gz" | sha256sum --check
+          tar -xzf publisher.tar.gz mcp-publisher
+      - run: ./mcp-publisher login github-oidc
+      - run: ./mcp-publisher publish server.json

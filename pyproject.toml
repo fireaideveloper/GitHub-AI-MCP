@@ -5,6 +5,7 @@ build-backend = "setuptools.build_meta"
 name = "github-ai-mcp"
 version = "1.0.2"
 description = "Policy-enforced GitHub development with one changed path per commit"
+readme = "README_PYPI.md"
 requires-python = ">=3.12"
 dependencies = ["mcp==2.3.0", "httpx==0.28.1", "keyring==25.7.0", "pydantic==2.14.0", "ruamel.yaml==0.19.1", "psutil==7.2.2"]
 [project.optional-dependencies]

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.fireaideveloper/github-ai-mcp",
+  "title": "GitHub-AI-MCP",
+  "description": "Local GitHub workflows with human review, repository policies and protected credentials.",
+  "repository": {
+    "url": "https://github.com/fireaideveloper/GitHub-AI-MCP",
+    "source": "github"
+  },
+  "version": "1.0.2",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "identifier": "github-ai-mcp",
+      "version": "1.0.2",
+      "runtimeHint": "uvx",
+      "transport": {
+        "type": "stdio"
+      },
+      "packageArguments": [
+        {
+          "type": "positional",
+          "value": "serve",
+          "valueHint": "command",
+          "isRequired": true
+        }
+      ]
+    }
+  ]
+}
