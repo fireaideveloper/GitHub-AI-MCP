@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/readme/hero.svg" alt="GitHub-AI-MCP — local control for AI-assisted GitHub workflows; Python 3.12+, Windows, MCP, MIT, v1.0.1" width="100%">
+  <img src="assets/readme/hero.svg" alt="GitHub-AI-MCP — local control for AI-assisted GitHub workflows; Python 3.12+, Windows, MCP, MIT, v1.0.2" width="100%">
 </p>
 
 # GitHub-AI-MCP
