@@ -1,3 +1,11 @@
+## 1.0.2 — 2026-11-28
+
+- Document all 26 public MCP tools, including purpose, parameters, return semantics, prerequisites and side effects.
+- Expose descriptions for existing input parameters in MCP schemas without changing their types or defaults.
+- Clarify destructive and open-world tool annotations; preserve local approvals and existing policy enforcement.
+- Add regression tests for definition coverage and signature compatibility.
+- PR #9 passed Python 3.12/3.13, Ubuntu and Windows offline checks, and security regressions. Glama TDQS re-evaluation is pending.
+
 # Проверка и исправления запуска — 2026-10-13
 
 Локальное исправление YAML без ключа/сети, редактируемая команда stdio, сохранение пользовательской команды, проверка введённого ключа, безопасные коды диагностики, обновление настроек служб, очистка неудачно запущенных процессов и регрессии. Подробности и ограничения: [AUDIT_RU.md](AUDIT_RU.md). Windows EXE в этой поставке не собран.
