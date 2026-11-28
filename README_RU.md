@@ -4,6 +4,10 @@
 
 # GitHub-AI-MCP
 
+<p align="center">
+  <a href="https://glama.ai/mcp/servers/fireaideveloper/GitHub-AI-MCP"><img src="https://glama.ai/mcp/servers/fireaideveloper/GitHub-AI-MCP/badges/score.svg" alt="GitHub AI MCP — оценка качества и поддержки на Glama"></a>
+</p>
+
 <p align="center"><strong>AI-разработка на GitHub с локальной проверкой и контролируемой публикацией.</strong></p>
 <p align="center">
   <a href="README.md">English</a> ·
